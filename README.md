@@ -96,10 +96,11 @@ pose-analysis/
 └── test.sh            # 测试脚本
 ```
 
+## 作者
+
+- **jv29**
+- 联系方式: [jv.rabby@gmail.com](mailto:jv.rabby@gmail.com)
+
 ## License
 
 MIT
-
-## 作者
-
-OpenClaw Community
