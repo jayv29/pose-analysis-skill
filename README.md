@@ -5,6 +5,7 @@
 ## 功能
 
 - 🎥 **视频姿态检测** - 用 MediaPipe 提取人体 33 个关键点
+- 📐 **几何生物力学分析** - 自动计算膝盖角度、重心高度等关键指标
 - 🤖 **AI 智能分析** - 调用 MiniMax M2.1/Gemini 分析动作质量
 - 📊 **专业报告** - 生成包含评分、问题分析、改进建议的完整报告
 - 💰 **低成本运行** - 本地运行 MediaPipe，仅消耗少量 AI tokens
@@ -70,6 +71,12 @@ python3 pose_analyzer.py /path/to/your/video.mp4
 - mediapipe
 - opencv-python
 - google-generativeai（或 MiniMax API）
+
+- 🤺 **击剑 (Fencing)** - 弓步深度与重心分析
+- 🏋️ **基础体能 (Fitness)** - 深蹲/硬拉姿态矫正
+- 🧗 **攀岩 (Climbing)** - 贴墙重心与手臂发力分析
+- 🏃 **跑步 (Running)** - 步频域垂直振幅分析
+- ⛷️ **滑雪 (Skiing)** - 平行腿与反弓姿态分析
 
 ## 技术栈
 
