@@ -1,0 +1,6 @@
+interface:
+  display_name: "Pose Analysis"
+  short_description: "Analyze training videos and body angles"
+  default_prompt: "Use $pose-analysis to analyze this training video and turn the pose metrics into coaching feedback."
+policy:
+  allow_implicit_invocation: true

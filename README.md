@@ -1,106 +1,66 @@
-# pose-analysis-skill
+# PoseAnalysis
 
-用 MediaPipe + AI 分析训练视频姿态，生成专业改进建议。
+Current version: `3.0.0`
 
-## 功能
+PoseAnalysis is a Codex skill for coach-grade Chinese sports technique analysis from local training videos.
 
-- 🎥 **视频姿态检测** - 用 MediaPipe 提取人体 33 个关键点
-- 📐 **几何生物力学分析** - 自动计算膝盖角度、重心高度等关键指标
-- 🤖 **AI 智能分析** - 调用 MiniMax M2.1/Gemini 分析动作质量
-- 📊 **专业报告** - 生成包含评分、问题分析、改进建议的完整报告
-- 💰 **低成本运行** - 本地运行 MediaPipe，仅消耗少量 AI tokens
+Current product scope:
 
-## 安装
+- Input: iPhone videos saved to iCloud Drive `PoseAnalysis/Inbox`.
+- Sports: foil fencing, top-rope/lead climbing, and basic youth fitness.
+- Output: video-quality gate, technical scoring when valid, training advice, next tracking metrics, and same-template history comparison.
+- Privacy: child identity is anonymized by default.
+
+This repository is the Codex upgrade of the previous OpenClaw `pose-analysis-skill` project. It keeps deterministic local MediaPipe pose extraction, and moves the expert reasoning layer into Codex skill references and current-session analysis.
+
+Start with:
+
+- `docs/product/PRODUCT_REQUIREMENTS.md`
+- `docs/skill-design/POSE_ANALYSIS_SKILL_REDESIGN.md`
+- `pose-analysis/SKILL.md`
+- `pose-analysis/references/input-spec.md`
+- `pose-analysis/references/video-quality-gate.md`
+- `pose-analysis/references/report-templates.md`
+- `pose-analysis/references/knowledge-base/README.md`
+
+Installed Codex skill copy:
+
+`~/.codex/skills/pose-analysis`
+
+iCloud Inbox:
+
+`~/Library/Mobile Documents/com~apple~CloudDocs/PoseAnalysis/Inbox`
+
+iCloud Report:
+
+`~/Library/Mobile Documents/com~apple~CloudDocs/PoseAnalysis/Report`
+
+## Usage
+
+Analyze the newest Inbox video:
 
 ```bash
-# 1. 创建虚拟环境
-python3 -m venv ~/.venv-pose
-source ~/.venv-pose/bin/activate
-
-# 2. 安装依赖
-pip install mediapipe opencv-python google-generativeai
-
-# 3. 下载 MediaPipe 模型
-curl -L -o /tmp/pose_landmarker.task \
-  "https://storage.googleapis.com/mediapipe-assets/pose_landmarker.task"
-
-# 4. 复制 skill 到 OpenClaw
-mkdir -p ~/.openclaw/workspace/skills/pose-analysis
-cp pose_analyzer.py ~/.openclaw/workspace/skills/pose-analysis/
-cp README.md ~/.openclaw/workspace/skills/pose-analysis/
+bash pose-analysis/scripts/run_skill.sh --latest
 ```
 
-## 使用
-
-### 命令行
+Analyze a specific video:
 
 ```bash
-source ~/.venv-pose/bin/activate
-python3 pose_analyzer.py /path/to/your/video.mp4
+POSE_ANALYSIS_SPORT=花剑 \
+POSE_ANALYSIS_TEMPLATE=弓步冲刺专项 \
+bash pose-analysis/scripts/run_skill.sh "/path/to/video.mov"
 ```
 
-### OpenClaw 自然语言
+The runner writes generated pose JSON, report skeletons, and history indexes to the report folder. Final coach-grade reports should be produced by Codex from the generated artifacts and the bundled knowledge base.
 
-直接告诉 Jarvis：
+## Validation
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests
+PYTHONPYCACHEPREFIX=/tmp/pose-analysis-pycache python3 -m py_compile \
+  pose-analysis/scripts/pose_analyzer.py \
+  pose-analysis/scripts/report_formatter.py \
+  pose-analysis/scripts/analyze_pose.py
+bash -n pose-analysis/scripts/run_skill.sh
+bash -n pose-analysis/scripts/download_pose_model.sh
 ```
-"用姿态分析 skill 分析 /path/to/your/训练视频.mp4"
-```
-
-## 输出示例
-
-```json
-{
-  "action": "弓步冲刺",
-  "score": "6.5/10",
-  "issues": [
-    "髋部高度不足",
-    "前腿膝关节过度前探",
-    "头部稳定性待提升"
-  ],
-  "suggestions": [
-    "加强髋部下降训练",
-    "优化膝关节角度控制",
-    "核心稳定性练习"
-  ]
-}
-```
-
-## 依赖
-
-- Python 3.11+
-- mediapipe
-- opencv-python
-- google-generativeai（或 MiniMax API）
-
-- 🤺 **击剑 (Fencing)** - 弓步深度与重心分析
-- 🏋️ **基础体能 (Fitness)** - 深蹲/硬拉姿态矫正
-- 🧗 **攀岩 (Climbing)** - 贴墙重心与手臂发力分析
-- 🏃 **跑步 (Running)** - 步频域垂直振幅分析
-- ⛷️ **滑雪 (Skiing)** - 平行腿与反弓姿态分析
-
-## 技术栈
-
-| 组件 | 用途 |
-|------|------|
-| MediaPipe | 姿态估计（本地运行） |
-| MiniMax M2.1 / Gemini 2.5 Pro | AI 分析 |
-| OpenClaw Skill | 自然语言调用 |
-
-## 目录结构
-
-```
-pose-analysis/
-├── README.md           # 此文件
-├── pose_analyzer.py     # 主脚本
-├── requirements.txt     # Python 依赖
-└── test.sh            # 测试脚本
-```
-
-## 作者
-
-- **jv29**
-- 联系方式: [jv.rabby@gmail.com](mailto:jv.rabby@gmail.com)
-
-## License
-
-MIT
