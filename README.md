@@ -10,6 +10,8 @@
 ![Python](https://img.shields.io/badge/Python-3.11%2B-blue)
 ![Privacy](https://img.shields.io/badge/privacy-local--first-success)
 
+![PoseAnalysis social preview](docs/assets/social-preview.svg)
+
 PoseAnalysis turns local training videos into professional Chinese coaching reports. It is designed for a parent-coach workflow: record a child athlete on an iPhone, save the video to iCloud Drive, let Codex run local pose extraction, then produce an evidence-based report with technical scoring, training advice, next-session tracking metrics, and same-template history comparison.
 
 This is not a SaaS product and not a generic pose demo. It is a Codex skill with a bundled sports knowledge base, deterministic local scripts, and strict report rules.
@@ -30,8 +32,23 @@ Most training videos are watched once and forgotten. PoseAnalysis makes them use
 - **Coach-grade Chinese reports**: final output is written for coaches first, parents second, and child-safe by default.
 - **Three sport domains**: foil fencing, top-rope/lead climbing, and youth fitness.
 - **Professional knowledge base**: scoring rubrics, phase recognition, evidence standards, history comparison rules, and privacy guardrails.
+- **Evidence-backed references**: official federation rules, MediaPipe/BlazePose research, youth training guidance, and pose-estimation limitations are tracked explicitly.
 - **History-aware**: compares only the same athlete, sport, action template, phase, and comparable capture quality.
 - **Privacy-first**: child identity is anonymized by default.
+
+## Professional Reference Base
+
+The analysis layer is intentionally source-aware. The bundled rubrics are shaped by official sport rules, sport-science references, and computer-vision limits instead of generic coaching language. These sources are references, not official endorsement.
+
+| Area | Reference sources | Used for |
+| --- | --- | --- |
+| Pose extraction | [Google MediaPipe Pose Landmarker](https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker), [BlazePose paper](https://arxiv.org/abs/2006.10204) | 33-landmark body model, video-frame processing, confidence thresholds, on-device pose-estimation assumptions |
+| Single-camera limits | [Human movement pose-estimation review](https://doi.org/10.1016/j.heliyon.2024.e39977) | occlusion risk, confidence labels, posture-analysis limitations, conservative report language |
+| Foil fencing | [FIE Rules](https://fie.org/fie/documents/rules), [FIE Technical Rules](https://static.fie.org/uploads/38/190673-technical%20rules%20ang.pdf) | foil terminology, offensive-action context, piste and equipment boundaries |
+| Climbing | [World Climbing Competition Resources](https://www.worldclimbing.com/resources/competitions), [Competition Rules](https://images.ifsc-climbing.org/ifsc/image/private/t_q_good/prd/jaq7awz9jmqwpddwnbpr.pdf) | lead/top-rope domain language, route context, clipping and competition terminology |
+| Youth fitness | [NSCA youth resistance training position statement](https://doi.org/10.1519/JSC.0b013e31819df407), [WHO physical activity guidelines](https://www.who.int/publications/b/55518) | age-appropriate load, supervision, technique-first progressions, health-boundary language |
+
+Full source notes live in [`docs/references/professional-sources.md`](docs/references/professional-sources.md).
 
 ## Supported Analysis Templates
 
@@ -57,6 +74,14 @@ flowchart TD
     H --> J
     J --> K["Report folder + history index"]
 ```
+
+## Demo Reports And Showcase
+
+- Project page: [`docs/index.html`](docs/index.html)
+- Anonymous examples: [`examples/reports`](examples/reports)
+- Social preview asset: [`docs/assets/social-preview.svg`](docs/assets/social-preview.svg)
+
+The demo reports are synthetic and anonymized. They are meant to show report structure, evidence labeling, and next-session metrics without exposing real child videos.
 
 ## Quick Start
 
@@ -185,11 +210,19 @@ pose-analysis-skill/
 │       └── knowledge-base/
 ├── docs/
 │   ├── product/
+│   ├── references/
 │   └── skill-design/
+├── examples/
+│   └── reports/
+├── .github/
+│   └── ISSUE_TEMPLATE/
 ├── tests/
 ├── README.md
 ├── README.zh-CN.md
 ├── CHANGELOG.md
+├── CONTRIBUTING.md
+├── SECURITY.md
+├── LICENSE
 └── VERSION
 ```
 
@@ -240,4 +273,4 @@ python3 ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py pose-ana
 
 ## License
 
-MIT.
+[MIT](LICENSE).

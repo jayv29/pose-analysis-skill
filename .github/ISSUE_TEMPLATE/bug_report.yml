@@ -1,0 +1,48 @@
+name: Bug report
+description: Report a reproducible issue in scripts, reports, or skill behavior.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What happened, and what did you expect instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      description: Use anonymized paths and remove child-identifying details.
+      placeholder: |
+        1. Put anonymized video in Inbox
+        2. Run ...
+        3. See ...
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - video quality gate
+        - pose extraction
+        - report skeleton
+        - final report
+        - history comparison
+        - documentation
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or output
+      render: shell
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy confirmation
+      options:
+        - label: I removed child names, faces, exact locations, and private file paths.
+          required: true

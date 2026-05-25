@@ -10,6 +10,8 @@
 ![Python](https://img.shields.io/badge/Python-3.11%2B-blue)
 ![Privacy](https://img.shields.io/badge/privacy-local--first-success)
 
+![PoseAnalysis social preview](docs/assets/social-preview.svg)
+
 PoseAnalysis 可以把本地训练视频转化为中文教练专业版技术报告。典型流程是：用 iPhone 拍摄孩子训练视频，保存到 iCloud Drive，Codex 调用本地 MediaPipe 提取姿态数据，再结合内置运动知识库生成报告，包括技术评分、关键问题、训练建议、下次追踪指标和同模板历史对比。
 
 它不是 SaaS，也不是通用姿态识别 Demo。它是一个 Codex Skill：用本地脚本做确定性姿态提取，用结构化知识库约束专业分析，用 Codex 当前会话完成最终教练报告。
@@ -30,8 +32,23 @@ PoseAnalysis 可以把本地训练视频转化为中文教练专业版技术报�
 - **中文教练专业版报告**：以教练为主读者，家长可理解，儿童隐私脱敏。
 - **三大运动方向**：花剑、top-rope/lead 攀岩、儿童基础体能。
 - **专业知识库**：内置评分 rubric、动作阶段识别、证据等级、历史对比和隐私规则。
+- **参考源可追溯**：显式记录官方规则、MediaPipe/BlazePose、青少年训练指南和单机位姿态估计局限。
 - **历史追踪**：只比较同一运动员、同一项目、同一动作模板、同一阶段和可比拍摄质量。
 - **隐私优先**：默认使用匿名身份，不记录儿童真实姓名。
+
+## 高级知识库参考源
+
+PoseAnalysis 的专业层不是泛泛的“AI 教练语言”，而是用官方规则、运动科学资料和计算机视觉边界来约束报告。以下来源用于塑造术语、评分维度、证据等级和安全边界；它们是参考来源，不代表任何机构对本项目背书。
+
+| 领域 | 参考源 | 用途 |
+| --- | --- | --- |
+| 姿态提取 | [Google MediaPipe Pose Landmarker](https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker), [BlazePose paper](https://arxiv.org/abs/2006.10204) | 33 点人体关键点、视频帧处理、置信度阈值、本地姿态估计假设 |
+| 单机位分析边界 | [人体运动姿态估计综述](https://doi.org/10.1016/j.heliyon.2024.e39977) | 遮挡风险、置信度标注、姿态分析局限、保守报告语言 |
+| 花剑 | [FIE Rules](https://fie.org/fie/documents/rules), [FIE Technical Rules](https://static.fie.org/uploads/38/190673-technical%20rules%20ang.pdf) | 花剑术语、进攻动作语境、剑道和装备边界 |
+| 攀岩 | [World Climbing Competition Resources](https://www.worldclimbing.com/resources/competitions), [Competition Rules](https://images.ifsc-climbing.org/ifsc/image/private/t_q_good/prd/jaq7awz9jmqwpddwnbpr.pdf) | lead/top-rope 项目语境、路线理解、clip 和比赛术语 |
+| 儿童基础体能 | [NSCA 青少年抗阻训练立场声明](https://doi.org/10.1519/JSC.0b013e31819df407), [WHO 体力活动指南](https://www.who.int/publications/b/55518) | 年龄适配负荷、监督、技术优先训练进阶、健康边界语言 |
+
+完整来源说明见 [`docs/references/professional-sources.md`](docs/references/professional-sources.md)。
 
 ## 支持的分析模板
 
@@ -57,6 +74,14 @@ flowchart TD
     H --> J
     J --> K["Report 文件夹 + 历史索引"]
 ```
+
+## 示例报告与展示页
+
+- 项目展示页：[`docs/index.html`](docs/index.html)
+- 匿名示例报告：[`examples/reports`](examples/reports)
+- GitHub 社交预览素材：[`docs/assets/social-preview.svg`](docs/assets/social-preview.svg)
+
+示例报告是合成匿名样例，用于展示报告结构、证据标注和下次追踪指标，不包含真实儿童视频或身份信息。
 
 ## 快速开始
 
@@ -185,11 +210,19 @@ pose-analysis-skill/
 │       └── knowledge-base/
 ├── docs/
 │   ├── product/
+│   ├── references/
 │   └── skill-design/
+├── examples/
+│   └── reports/
+├── .github/
+│   └── ISSUE_TEMPLATE/
 ├── tests/
 ├── README.md
 ├── README.zh-CN.md
 ├── CHANGELOG.md
+├── CONTRIBUTING.md
+├── SECURITY.md
+├── LICENSE
 └── VERSION
 ```
 
@@ -240,4 +273,4 @@ python3 ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py pose-ana
 
 ## License
 
-MIT.
+[MIT](LICENSE).

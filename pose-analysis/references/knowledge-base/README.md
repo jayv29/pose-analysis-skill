@@ -41,15 +41,15 @@
 
 ## 来源记录
 
+详细来源记录见 [`../../../docs/references/professional-sources.md`](../../../docs/references/professional-sources.md)。
+
 初始知识库参考了以下来源类型：
 
-- MediaPipe Pose Landmarker 官方文档：用于理解身体关键点、视频输入和 landmark 输出边界。
-- British Academy of Fencing footwork teaching material：用于花剑步法训练和常见错误框架。
-- FIE technical rules and action descriptions：用于花剑攻击、弓步和剑手威胁逻辑。
-- fencing biomechanics reviews and lunge studies：用于弓步中下肢协调、髋膝活动范围、后腿驱动和速度相关因素。
-- IFSC / World Climbing and USA Climbing resources：用于 lead/top-rope 项目语境、规则和教练发展框架。
-- sport climbing technique and skeleton-video analysis research：用于攀岩动作经济性、手臂效率、重心、脚法和骨架视频分析边界。
-- NSCA and AAP youth training position statements：用于儿童基础体能训练的长期发展、监督、动作质量和训练负荷边界。
+- MediaPipe Pose Landmarker 官方文档和 BlazePose 论文：用于理解身体关键点、视频输入和 landmark 输出边界。
+- FIE 官方规则和技术规则：用于花剑攻击、弓步、剑手威胁逻辑和比赛语境。
+- World Climbing / IFSC 竞赛资源：用于 lead/top-rope 项目语境、规则和术语边界。
+- 姿态估计与人体动作分析综述：用于单机位、遮挡、置信度和视频证据限制。
+- NSCA 青少年抗阻训练立场声明和 WHO 体力活动指南：用于儿童基础体能训练的长期发展、监督、动作质量和训练负荷边界。
 
 ## 维护规则
 

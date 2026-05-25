@@ -1,0 +1,36 @@
+name: Feature request
+description: Propose a sport template, workflow improvement, or report capability.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What workflow or analysis gap should this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: What should PoseAnalysis do?
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - report quality
+        - sport knowledge base
+        - history comparison
+        - video input workflow
+        - privacy and safety
+        - developer experience
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes or references

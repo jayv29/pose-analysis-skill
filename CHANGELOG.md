@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- GitHub-ready repository presentation with bilingual README upgrades, source-backed knowledge-base highlights, demo reports, GitHub Pages showcase, issue templates, license, contribution guide, security/privacy notes, and social preview assets.
+
 ## [3.0.0] - 2026-05-25
 
 ### Changed

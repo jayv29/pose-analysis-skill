@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and ideas
+    url: https://github.com/jayv29/pose-analysis-skill/discussions
+    about: Use Discussions for capture-angle questions, sport template ideas, and report-quality feedback.
